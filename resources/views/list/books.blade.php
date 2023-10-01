@@ -28,7 +28,7 @@
           <td>{{ $book->stock }}</td>
           <td>
             <a href="{{ route('books.update', ['id' => $book->isbn]) }}" class="btn btn-warning">Edit</a>
-            <a href="" class="btn btn-danger">Delete</a>
+            <a href="{{ route('books.delete', ['id' => $book->isbn]) }}" class="btn btn-danger">Delete</a>
           </td>
         </tr>
         @endforeach

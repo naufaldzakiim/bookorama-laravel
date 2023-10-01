@@ -40,14 +40,15 @@
 <div class="card mt-3">
   <div class="card-header">Book Reviews</div>
   <div class="card-body">
-    
+    {{$book_review? $book_review->review : ''}}
   </div>
 </div>
 
 <div class="card mt-3">
   <div class="card-header">Add a Review</div>
   <div class="card-body">
-    <form action="" method="POST">
+    <form action="{{route('books.review',['id'=> $book->isbn])}}" method="POST">
+      @csrf
       <textarea name="review" class="form-control" rows="5" placeholder="Leave a review here" id="floatingTextarea"></textarea>
       <button class="btn btn-primary mt-3" type="submit" name="submit">Submit</button>
     </form>
