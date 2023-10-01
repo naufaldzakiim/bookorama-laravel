@@ -23,6 +23,7 @@
       <div class="form-group">
         <label for="category">Category:</label>
         <select name="category" id="category" class="form-control" required>
+          <option value="none">--Select a Category--</option>
           @foreach($categories as $category)
           <option value="{{ $category->categoryid }}">{{ $category->name }}</option>
           @endforeach
