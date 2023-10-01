@@ -12,4 +12,9 @@ class BooksController extends Controller
 
         return view('list.books', ['books' => $books]);
     }
+
+    function add(){
+        $categories = DB::select("SELECT * FROM categories");
+        return view('add.books', ['categories' => $categories]);
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BooksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('books/list', [BooksController::class, 'list'])->name('books.list');
+Route::get('books/add', [BooksController::class, 'add'])->name('books.add');

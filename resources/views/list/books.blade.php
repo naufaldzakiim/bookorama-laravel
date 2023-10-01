@@ -4,7 +4,7 @@
 <div class="card mt-3">
   <div class="card-header">Books Data</div>
   <div class="card-body">
-    <a href="" class="btn btn-primary">+ Add New Book</a>
+    <a href="{{ route('books.add') }}" class="btn btn-primary">+ Add New Book</a>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -27,7 +27,7 @@
           <td>{{ $book->price }}</td>
           <td>{{ $book->stock }}</td>
           <td>
-            <a href="" class="btn btn-info">Edit</a>
+            <a href="" class="btn btn-warning">Edit</a>
             <a href="" class="btn btn-danger">Delete</a>
           </td>
         </tr>
