@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect() -> route('books.list');
 });
+
+Route::get('books/list', [BooksController::class, 'list'])->name('books.list');
