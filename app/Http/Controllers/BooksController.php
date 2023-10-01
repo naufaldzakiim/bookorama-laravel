@@ -13,6 +13,14 @@ class BooksController extends Controller
         return view('list.books', ['books' => $books]);
     }
 
+    function detail($id){
+        $book = DB::select("SELECT b.isbn as isbn, b.author as author, b.title as title, c.name as category, b.price as price, b.stock as stock FROM books b, categories c WHERE b.categoryid = c.categoryid AND b.isbn = ?", [$id]);
+        
+        $review = DB::select("SELECT * from book_reviews WHERE isbn = ?", [$id]);
+
+        return view('detail.books', ['book' => $book[0], 'reviews' => $review]);
+    }
+
     function add(){
         $categories = DB::select("SELECT * FROM categories");
         return view('add.books', ['categories' => $categories]);
