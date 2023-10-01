@@ -25,7 +25,13 @@ class BooksController extends Controller
 
     function detail($id)
     {
-        $book = DB::select("SELECT b.isbn as isbn, b.author as author, b.title as title, c.name as category, b.price as price, b.stock as stock FROM books b, categories c WHERE b.categoryid = c.categoryid AND b.isbn = ?", [$id]);
+        $book = DB::select("SELECT b.isbn as isbn, 
+                            b.author as author, 
+                            b.title as title, c.name as category, 
+                            b.price as price, 
+                            b.stock as stock FROM books b,
+                            categories c WHERE b.categoryid = c.categoryid 
+                            AND b.isbn = ?", [$id]);
 
         $review = DB::selectOne("SELECT * from reviews WHERE isbn = ?", [$id]);
 
@@ -80,7 +86,6 @@ class BooksController extends Controller
 
     function update($isbn)
     {
-
         // validate the input
         $validator = Validator::make(request()->all(), [
             'isbn' => 'required|string',
@@ -94,14 +99,16 @@ class BooksController extends Controller
         $count_isbn = DB::table('books')->where('isbn', '=', $isbn)->count();
         if ($count_isbn == 0) {
             return redirect()->route('books.list');
+        } else {
+            $validator->sometimes('isbn', 'unique:books,isbn', function ($input) use ($isbn) {
+                return $input->isbn != $isbn;
+            });
         }
-
         // if validation fails, it will redirect to the previous page
         // with the old input, and error messages
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
-
         // if validation passes, it will proceed to the next code
 
         $data = [
@@ -118,7 +125,15 @@ class BooksController extends Controller
     }
     function viewUpdate($id)
     {
-        $book = DB::select("SELECT b.isbn as isbn, b.author as author, b.title as title,b.categoryid as categoryid, c.name as category, b.price as price, b.stock as stock FROM books b, categories c WHERE b.categoryid = c.categoryid AND b.isbn = ?", [$id]);
+        $book = DB::select("SELECT b.isbn as isbn,
+                             b.author as author, 
+                             b.title as title,
+                             b.categoryid as categoryid, 
+                             c.name as category, 
+                             b.price as price, 
+                             b.stock as stock FROM books b, 
+                             categories c WHERE b.categoryid = c.categoryid 
+                             AND b.isbn = ?", [$id]);
 
         $categories = DB::select("SELECT * FROM categories");
 
