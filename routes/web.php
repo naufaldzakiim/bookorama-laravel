@@ -21,3 +21,4 @@ Route::get('/', function () {
 Route::get('books/list', [BooksController::class, 'list'])->name('books.list');
 Route::get('books/add', [BooksController::class, 'add'])->name('books.add');
 Route::get('books/detail/{id}', [BooksController::class, 'detail'])->name('books.detail');
+Route::get('books/update/{id}', [BooksController::class, 'update'])->name('books.update');
